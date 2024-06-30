@@ -7,11 +7,11 @@ class ClientController extends Database {
             if(!dados.name || !dados.email || !dados.cpf || !dados.contact){
                 return response.status(400).json({mensagem: "O nome, o email, o cpf e o contato são obrigatorios"})
             }
-            await this.database.query(`
+            const cliente = await this.database.query(`
                 Insert into clients (name, email, cpf, contact) 
                 values ($1, $2, $3, $4)
                 `, [dados.name, dados.email, dados.cpf, dados.contact])
-                response.status(201).json({mensagem: "Cliente cadastrado com sucesso"})
+                response.status(201).json(cliente.rows[0])
         } catch (error) {
             console.log(error)
             response.status(500).json({mensagem: "Não foi possivel cadastrar o cliente"})
