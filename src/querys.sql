@@ -11,7 +11,7 @@ exercicio 3
 
 create table categories (
 	id serial primary key,
-	name varchar(150) not null
+	name_category varchar(150) not null
 );
 
 insert into categories (name) 
