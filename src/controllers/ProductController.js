@@ -24,6 +24,19 @@ class ProductController extends Database {
             response.status(500).json({mensagem: "Não foi possivel realizar a busca"})
         }
     }
+
+    async listarUmProduto(request, response) {
+        try {
+            const id = request.params.id
+            const produto = await this.database.query(`select products.name, products.amount, products.color, products.voltage, products.description, categories.name_category  from products join categories on products.category_id = categories.id where products.id = $1`, [id])
+            if(produto.rows.length === 0) {
+                response.status(404).json({mensagem: "Não foi possive encontrar um produto com o id enviado"})
+            }
+            response.json(produto.rows[0])
+        } catch (error) {
+            response.status(500).json({mensagem: "Não foi possivel realizar a busca"})
+        }
+    }
 }
 
 module.exports = ProductController
