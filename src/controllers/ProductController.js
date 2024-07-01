@@ -15,6 +15,15 @@ class ProductController extends Database {
             response.status(500).json({mensagem: "Não foi possivel cadastrar o produto"})
         }
     }
+
+    async listarTodosProdutos(request, response) {
+        try {
+            const produtos = await this.database.query(`Select * from products`)
+            response.status(200).json(produtos.rows)
+        } catch (error) {
+            response.status(500).json({mensagem: "Não foi possivel realizar a busca"})
+        }
+    }
 }
 
 module.exports = ProductController
