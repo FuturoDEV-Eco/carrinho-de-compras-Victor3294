@@ -9,7 +9,7 @@ class ClientController extends Database {
             }
             const cliente = await this.database.query(`
                 Insert into clients (name, email, cpf, contact) 
-                values ($1, $2, $3, $4)
+                values ($1, $2, $3, $4) returning *
                 `, [dados.name, dados.email, dados.cpf, dados.contact])
                 response.status(201).json(cliente.rows[0])
         } catch (error) {
@@ -20,4 +20,4 @@ class ClientController extends Database {
     }
 }
 
-module.exports = ClientController
+module.exports = ClientController 

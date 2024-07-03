@@ -38,3 +38,26 @@ create table products (
 	category_id int not null,
 	foreign key (category_id) references categories (id)
 );
+
+alter table products add column price decimal(10, 2)
+
+exercicio 6
+
+create table orders(
+	id serial primary key,
+	total decimal(10,2) not null,
+	address text not null,
+	observations text,
+	client_id integer not null,
+	foreign key (client_id) references clients (id)
+)
+
+create table order_items (
+	id serial primary key,
+	price decimal(10,2) not null,
+	amount text not null,
+	order_id integer not null,
+	product_id integer not null,
+	foreign key (order_id) references orders (id),
+	foreign key (product_id) references products (id)
+)
