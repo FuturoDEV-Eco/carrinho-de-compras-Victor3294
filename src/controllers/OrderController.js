@@ -24,7 +24,7 @@ class OrderController extends Database {
                     (price, amount, order_id, product_id)
                     values ($1, $2, $3, $4)`, [precoAtual.rows[0].price, produto.amount, pedido.rows[0].id, produto.product_id])
             });
-            response.status(201).json({mensagem: pedido.rows[0].id})
+            response.status(201).json({mensagem: "carrinho cadastrado com sucesso!"})
         } catch (error) {
             console.log(error)
             response.status(500).json({mensagem: "Não foi possivel cadastrar o pedido"})
